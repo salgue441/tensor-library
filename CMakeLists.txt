@@ -50,9 +50,9 @@ if(TENSOR_BUILD_TESTS)
 endif()
 
 # Examples
-if(TENSOR_BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif()
+# if(TENSOR_BUILD_EXAMPLES)
+#     add_subdirectory(examples)
+# endif()
 
 # Benchmarks
 if(TENSOR_BUILD_BENCHMARKS)
