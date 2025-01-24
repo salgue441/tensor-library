@@ -38,6 +38,9 @@ target_include_directories(tensor INTERFACE
     $<INSTALL_INTERFACE:include>
 )
 
+# Dependencies
+find_package(OpenMP REQUIRED)
+
 # Source files (if any non-header implementations)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_subdirectory(src)
@@ -89,3 +92,6 @@ configure_package_config_file(
     ${CMAKE_CURRENT_BINARY_DIR}/TensorConfig.cmake
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/tensor
 )
+
+target_compile_options(tensor INTERFACE -mavx2 -fopenmp)
+target_link_libraries(tensor INTERFACE OpenMP::OpenMP_CXX)

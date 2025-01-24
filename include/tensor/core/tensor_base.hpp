@@ -48,6 +48,7 @@ namespace tensor
       evaluate(expr);
     }
 
+    // Operator
     /**
      * @brief Operator [] to access elements of the tensor
      *
