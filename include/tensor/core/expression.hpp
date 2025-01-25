@@ -54,6 +54,20 @@ namespace tensor
      * @return iterator End iterator
      */
     auto end() const { return derived().end(); }
+
+    /**
+     * @brief Get the begin iterator
+     *
+     * @return const_iterator Begin iterator
+     */
+    const_iterator cbegin() const { return derived().begin(); }
+
+    /**
+     * @brief Get the end iterator
+     *
+     * @return const_iterator End iterator
+     */
+    const_iterator cend() const { return derived().end(); }
   };
 
   /**
