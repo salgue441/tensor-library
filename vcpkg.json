@@ -1,5 +1,5 @@
 {
-  "name": "tensor-library",
+  "name": "tensor-framework",
   "version": "0.1.0",
-  "dependencies": ["gtest", "benchmark"]
+  "dependencies": ["gtest", "benchmark", "cuda", "openblas", "fmt", "spdlog", "nlohmann-json", "cli11"]
 }

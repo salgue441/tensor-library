@@ -4,17 +4,14 @@ set -euo pipefail
 # Default values
 BUILD_TYPE="Release"
 COMPILER="gcc"
-TEST_FILTER=""
-BENCHMARK=false
 
 # Help message
 show_help() {
-  echo "Usage: $0 [options]"
+  echo "Usage: $0 EXAMPLE_NAME [options]"
   echo "Options:"
   echo "  -h, --help              Show this help message"
   echo "  -t, --type TYPE         Build type (Debug|Release|RelWithDebInfo) [default: Release]"
   echo "  -c, --compiler CC       Compiler to use (gcc|clang) [default: gcc]"
-  echo "  -f, --filter PATTERN    Only run tests matching pattern"
 }
 
 # Parse arguments
@@ -32,17 +29,24 @@ while [[ $# -gt 0 ]]; do
     COMPILER="$2"
     shift 2
     ;;
-  -f | --filter)
-    TEST_FILTER="$2"
-    shift 2
-    ;;
   *)
-    echo "Unknown option: $1"
-    show_help
-    exit 1
+    if [ -z "${EXAMPLE_NAME+x}" ]; then
+      EXAMPLE_NAME="$1"
+      shift
+    else
+      echo "Unknown option: $1"
+      show_help
+      exit 1
+    fi
     ;;
   esac
 done
+
+if [ -z "${EXAMPLE_NAME+x}" ]; then
+  echo "Error: EXAMPLE_NAME is required"
+  show_help
+  exit 1
+fi
 
 BUILD_DIR="build/${COMPILER}-${BUILD_TYPE,,}"
 
@@ -51,13 +55,12 @@ if [ ! -d "$BUILD_DIR" ]; then
   exit 1
 fi
 
-cd "$BUILD_DIR"
+EXAMPLE_PATH="$BUILD_DIR/bin/$EXAMPLE_NAME"
 
-echo "Running tests..."
-if [ -n "$TEST_FILTER" ]; then
-  LD_LIBRARY_PATH="" ./tests/unit/unit_tests --gtest_filter="$TEST_FILTER"
-else
-  LD_LIBRARY_PATH="" ./tests/unit/unit_tests
+if [ ! -f "$EXAMPLE_PATH" ]; then
+  echo "Example '$EXAMPLE_NAME' not found in $EXAMPLE_PATH"
+  exit 1
 fi
 
-cd ../..
+echo "Running example '$EXAMPLE_NAME'..."
+"$EXAMPLE_PATH"
