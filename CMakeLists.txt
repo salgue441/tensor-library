@@ -6,6 +6,7 @@ option(TENSOR_BUILD_TESTS "Build test suite" ON)
 option(TENSOR_BUILD_BENCHMARKS "Build benchmarks" OFF)
 option(TENSOR_BUILD_EXAMPLES "Build examples" ON)
 option(TENSOR_USE_SIMD "Enable SIMD optimizations" ON)
+option(TENSOR_USE_CUDA "Enable CUDA support" OFF)
 
 # C++20 requirement
 set(CMAKE_CXX_STANDARD 20)
@@ -41,10 +42,10 @@ target_include_directories(tensor INTERFACE
 # Dependencies
 find_package(OpenMP REQUIRED)
 
-# # Source files (if any non-header implementations)
-# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src")
-#     add_subdirectory(src)
-# endif()
+# Source files (if any non-header implementations)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_subdirectory(src)
+endif()
 
 # Tests
 if(TENSOR_BUILD_TESTS)
