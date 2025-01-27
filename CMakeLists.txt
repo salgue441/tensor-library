@@ -41,10 +41,10 @@ target_include_directories(tensor INTERFACE
 # Dependencies
 find_package(OpenMP REQUIRED)
 
-# Source files (if any non-header implementations)
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src")
-    add_subdirectory(src)
-endif()
+# # Source files (if any non-header implementations)
+# if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src")
+#     add_subdirectory(src)
+# endif()
 
 # Tests
 if(TENSOR_BUILD_TESTS)

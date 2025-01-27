@@ -6,47 +6,93 @@
 namespace tensor
 {
   /**
-   * @brief TensorException base class for all custom exceptions
+   * @class TensorException
+   * @brief Extends runtime error for tensor related exceptions
    *
+   * @version 1.0.0
    */
   class TensorException : public std::runtime_error
   {
   public:
-    /**
-     * @brief Construct a new Tensor Exception object
-     *
-     * @param msg Message to be displayed
-     */
-    explicit TensorException(const std::string &msg) : std::runtime_error(msg) {}
+    explicit TensorException(const std::string &message)
+        : std::runtime_error(message) {};
   };
 
   /**
-   * @brief Exception thrown when tensor dimensions do not match
+   * @class DeviceError
+   * @brief Exception for device related errors
    *
+   * @version 1.0.0
    */
-  class DimensionMismatch : public TensorException
+  class DeviceError : public TensorException
   {
   public:
-    explicit DimensionMismatch(const std::string &msg) : TensorException(msg) {}
+    explicit DeviceError(const std::string &message)
+        : TensorException("Device error: " + message) {}
   };
 
   /**
-   * @brief Exception thrown when tensor shapes do not match
+   * @class TypeError
+   * @brief Exception for type related errors
    *
+   * @version 1.0.0
+   */
+  class TypeError : public TensorException
+  {
+  public:
+    explicit TypeError(const std::string &message)
+        : TensorException("Type error: " + message) {}
+  };
+
+  /**
+   * @class StorageError
+   * @brief Exception for storage related errors
+   *
+   * @version 1.0.0
+   */
+  class StorageError : public TensorException
+  {
+  public:
+    explicit StorageError(const std::string &message)
+        : TensorException("Storage error: " + message) {}
+  };
+
+  /**
+   * @class IndexError
+   * @brief Exception for index related errors
+   *
+   * @version 1.0.0
+   */
+  class IndexError : public TensorException
+  {
+  public:
+    explicit IndexError(const std::string &message)
+        : TensorException("Index error: " + message) {}
+  };
+
+  /**
+   * @class ShapeError
+   * @brief Exception for shape related errors
+   *
+   * @version 1.0.0
    */
   class ShapeError : public TensorException
   {
   public:
-    explicit ShapeError(const std::string &msg) : TensorException(msg) {}
+    explicit ShapeError(const std::string &message)
+        : TensorException("Shape error: " + message) {}
   };
 
   /**
-   * @brief Exception thrown when tensor memory allocation fails
+   * @class NotImplementedError
+   * @brief Exception for not implemented errors
    *
+   * @version 1.0.0
    */
-  class MemoryError : public TensorException
+  class NotImplementedError : public TensorException
   {
   public:
-    explicit MemoryError(const std::string &msg) : TensorException(msg) {}
+    explicit NotImplementedError(const std::string &message)
+        : TensorException("Not implemented: " + message) {}
   };
 } // namespace tensor

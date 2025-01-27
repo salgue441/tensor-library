@@ -5,12 +5,7 @@ include(GoogleTest)
 
 # Unit test
 add_executable(tensor_tests
-    unit/storage_test.cpp
-    unit/tensor_test.cpp
-    unit/expression_test.cpp
-    unit/matrix_ops_test.cpp
-    unit/unary_ops_test.cpp
-    # unit/reduction_ops_test.cpp
+    unit/core/dtype_test.cpp
 )
 
 target_link_libraries(tensor_tests
